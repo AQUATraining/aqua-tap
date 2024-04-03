@@ -17,16 +17,16 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag scanner:${{ github.sha }}
+      run: docker build . --file Dockerfile --tag scanner:2403.2.15
 
     - name: Login to Aqua registry and pull scanner
-      run: docker login registry.aquasec.com -u denisa.cretu@eviden.com -p ParolaAQUADenissaC.1 && docker pull registry.aquasec.com/scanner:${{ github.sha }}
+      run: docker login registry.aquasec.com -u denisa.cretu@eviden.com -p ParolaAQUADenissaC.1 && docker pull registry.aquasec.com/scanner:2403.2.15
 
     - name: Run Docker
-      run: docker run -v /var/run/docker.sock:/var/run/docker.sock registry.aquasec.com/scanner:2403.2.15 scan -H https://c3b46c6941-d.cloud.aquasec.com -A 440d5522fee4670c6c617adff47d711b7c8f057e --local scanner:${{ github.sha }}
+      run: docker run -v /var/run/docker.sock:/var/run/docker.sock registry.aquasec.com/scanner:2403.2.15 scan -H https://c3b46c6941-d.cloud.aquasec.com -A 440d5522fee4670c6c617adff47d711b7c8f057e --local scanner:2403.2.15
       
     - name: Tag image with Registry
-      run: docker tag scanner:${{ github.sha }} registry.aquasec.com/scanner:${{ github.sha }}
+      run: docker tag scanner:2403.2.15 registry.aquasec.com/scanner:2403.2.15
 
     - name: Push to Registry #something
-      run: echo "docker push registry.aquasec.com/scanner:${{ github.sha }}"
+      run: echo "docker push registry.aquasec.com/scanner:2403.2.15"

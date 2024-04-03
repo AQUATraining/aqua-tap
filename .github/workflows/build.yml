@@ -20,7 +20,7 @@ jobs:
       run: docker build . --file Dockerfile --tag scanner:${{ github.sha }}
 
     - name: Tag image with Registry
-      run: docker tag my-demo-image:${{ github.sha }} registry.aquasec.com/scanner:${{ github.sha }}
+      run: docker tag scanner:${{ github.sha }} registry.aquasec.com/scanner:${{ github.sha }}
 
     - name: Push to Registry #something
       run: echo "docker push registry.aquasec.com/scanner:${{ github.sha }}"

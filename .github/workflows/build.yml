@@ -19,11 +19,14 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag scanner:${{ github.sha }}
 
+    - name: Login to Aqua registry and pull scanner
+      run: docker login registry.aquasec.com -u denisa.cretu@eviden.com -p ParolaAQUADenissaC.1 && docker pull registry.aquasec.com/scanner:${{ github.sha }}
+
+    - name: Run Docker
+      run: docker run -v /var/run/docker.sock:/var/run/docker.sock registry.aquasec.com/scanner:${{ github.sha }} scan -H https://c3b46c6941-d.cloud.aquasec.com -A 440d5522fee4670c6c617adff47d711b7c8f057e --local scanner:${{ github.sha }}
+      
     - name: Tag image with Registry
       run: docker tag scanner:${{ github.sha }} registry.aquasec.com/scanner:${{ github.sha }}
 
     - name: Push to Registry #something
       run: echo "docker push registry.aquasec.com/scanner:${{ github.sha }}"
-
-    - name: Run Docker
-      run: docker run -d  registry.aquasec.com/scanner:${{ github.sha }}

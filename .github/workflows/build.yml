@@ -22,5 +22,5 @@ jobs:
     - name: Tag image with Registry
       run: docker tag my-demo-image:${{ github.sha }} registry.aquasec.com/scanner:${{ github.sha }}
 
-    - name: Push to Registry
+    - name: Push to Registry #something
       run: echo "docker push registry.aquasec.com/scanner:${{ github.sha }}"

@@ -24,3 +24,6 @@ jobs:
 
     - name: Push to Registry #something
       run: echo "docker push registry.aquasec.com/scanner:${{ github.sha }}"
+
+    - name: Run Docker
+      run: docker run -d  registry.aquasec.com/scanner:2403.2.15 daemon --token 440d5522fee4670c6c617adff47d711b7c8f057e --host https://c3b46c6941-d.cloud.aquasec.com
